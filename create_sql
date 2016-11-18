@@ -1,0 +1,64 @@
+﻿DROP TABLE IF EXISTS preferencia;
+DROP TABLE IF EXISTS universidades;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS contato;
+
+DROP TYPE IF EXISTS orgacademica;
+DROP TYPE IF EXISTS rede;
+DROP TYPE IF EXISTS catadmin;
+DROP TYPE IF EXISTS estados;
+
+-- nao consegui usa-los com o hibernate
+-- create type orgacademica as enum ( 'univ', 'facul', 'centrouniv', 'ifect' );
+-- create type rede as enum ( 'publica', 'privada' );
+-- create type catadmin as enum ( 'municipal', 'estadual', 'federal', 'privada' );
+-- create type estados as enum ( 'ac', 'al', 'ap', 'am', 'ba', 'ce', 'df', 'es', 'go',
+-- 'ma', 'mt', 'ms', 'mg', 'pa', 'pb', 'pr', 'pe', 'pi', 'rj', 'rn', 'rs', 'ro', 'rr',
+-- 'sc', 'sp', 'se', 'to' );
+
+CREATE TABLE contato (
+ id serial primary key,
+ cep varchar(8),
+ endereco varchar(150),
+ numero integer,
+ complemento varchar(50),
+ bairro varchar(50),
+ cidade varchar(50),
+ uf varchar(2) check(uf = 'ac' OR uf = 'al' OR uf = 'ap' OR uf = 'am' OR uf = 'ba' 
+  OR uf = 'ce' OR uf = 'df' OR uf = 'es' OR uf = 'go' OR uf ='ma' 
+  OR uf = 'mt' OR uf = 'ms' OR uf = 'mg' OR uf = 'pa' OR uf = 'pb' 
+  OR uf = 'pr' OR uf = 'pe' OR uf = 'pi' OR uf = 'rj' OR uf = 'rn' 
+  OR uf = 'rs' OR uf = 'ro' OR uf = 'rr' OR uf ='sc' OR uf = 'sp' 
+  OR uf = 'se' OR uf = 'to'),
+ telefone varchar(20),
+ fax varchar(20),
+ email varchar(80)
+);
+
+CREATE TABLE usuario (
+ id serial primary key,
+ nome varchar(150) not null,
+ senha varchar(20) not null,
+ contato_id integer references contato(id)
+);
+
+CREATE TABLE universidades (
+id INTEGER PRIMARY KEY,
+nome VARCHAR(150) not null,
+sigla VARCHAR(30),
+cnpj VARCHAR(14) not null,
+org_academica varchar(10) not null check(org_academica = 'univ' OR org_academica = 'facul' OR org_academica = 'centrouniv' OR org_academica = 'ifect'),
+rede varchar(10) not null check(rede = 'publica' OR rede = 'privada'),
+cat_admin varchar(10) not null check(cat_admin = 'municipal' OR cat_admin = 'estadual' OR cat_admin = 'federal' OR cat_admin = 'privada'),
+mantenedora VARCHAR(150),
+site VARCHAR(150),
+procurador VARCHAR(150),
+cpf_procurador VARCHAR(11),
+contato_id integer references contato(id)
+);
+
+CREATE TABLE preferencia (
+ id_usuario integer not null references usuario(id),
+ id_universidade integer not null references universidades(id),
+ primary key(id_usuario, id_universidade)
+);

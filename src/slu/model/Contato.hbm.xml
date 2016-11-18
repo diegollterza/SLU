@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/11/2016 13:43:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="slu.model.Contato" table="contato" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="cep" type="string">
+            <column name="cep" length="8" />
+        </property>
+        <property name="endereco" type="string">
+            <column name="endereco" length="150" />
+        </property>
+        <property name="numero" type="java.lang.Integer">
+            <column name="numero" />
+        </property>
+        <property name="complemento" type="string">
+            <column name="complemento" length="50" />
+        </property>
+        <property name="bairro" type="string">
+            <column name="bairro" length="50" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" length="50" />
+        </property>
+        <property name="uf" type="string">
+            <column name="uf" length="2" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="20" />
+        </property>
+        <property name="fax" type="string">
+            <column name="fax" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contato_id" />
+            </key>
+            <one-to-many class="slu.model.Usuario" />
+        </set>
+        <set name="universidadeses" table="universidades" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contato_id" />
+            </key>
+            <one-to-many class="slu.model.Universidades" />
+        </set>
+    </class>
+</hibernate-mapping>

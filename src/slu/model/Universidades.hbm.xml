@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/11/2016 13:43:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="slu.model.Universidades" table="universidades" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contato" class="slu.model.Contato" fetch="select">
+            <column name="contato_id" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="150" not-null="true" />
+        </property>
+        <property name="sigla" type="string">
+            <column name="sigla" length="30" />
+        </property>
+        <property name="cnpj" type="string">
+            <column name="cnpj" length="14" not-null="true" />
+        </property>
+        <property name="orgAcademica" type="string">
+            <column name="org_academica" length="10" not-null="true" />
+        </property>
+        <property name="rede" type="string">
+            <column name="rede" length="10" not-null="true" />
+        </property>
+        <property name="catAdmin" type="string">
+            <column name="cat_admin" length="10" not-null="true" />
+        </property>
+        <property name="mantenedora" type="string">
+            <column name="mantenedora" length="150" />
+        </property>
+        <property name="site" type="string">
+            <column name="site" length="150" />
+        </property>
+        <property name="procurador" type="string">
+            <column name="procurador" length="150" />
+        </property>
+        <property name="cpfProcurador" type="string">
+            <column name="cpf_procurador" length="11" />
+        </property>
+        <set name="usuarios" table="preferencia" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_universidade" not-null="true" />
+            </key>
+            <many-to-many entity-name="slu.model.Usuario">
+                <column name="id_usuario" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
