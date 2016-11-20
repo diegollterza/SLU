@@ -84,7 +84,6 @@ public class Tester {
                 contato.setCidade(MUNICIPIOIES);
                 contato.setUf(SIGLA.toLowerCase());
                 contato.setTelefone(NU_TELEFONE);
-                contato.setFax(null);
                 contato.setEmail(TX_EMAIL.split("[;,/]")[0].trim());
                 contato.setId(i);
 

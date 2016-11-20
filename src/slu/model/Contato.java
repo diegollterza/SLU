@@ -14,7 +14,6 @@ public class Contato implements java.io.Serializable {
     private String cidade;
     private String uf;
     private String telefone;
-    private String fax;
     private String email;
     private Set usuarios = new HashSet(0);
     private Set universidadeses = new HashSet(0);
@@ -26,7 +25,7 @@ public class Contato implements java.io.Serializable {
         this.id = id;
     }
 
-    public Contato(int id, String cep, String endereco, Integer numero, String complemento, String bairro, String cidade, String uf, String telefone, String fax, String email, Set usuarios, Set universidadeses) {
+    public Contato(int id, String cep, String endereco, Integer numero, String complemento, String bairro, String cidade, String uf, String telefone, String email, Set usuarios, Set universidadeses) {
         this.id = id;
         this.cep = cep;
         this.endereco = endereco;
@@ -36,7 +35,6 @@ public class Contato implements java.io.Serializable {
         this.cidade = cidade;
         this.uf = uf;
         this.telefone = telefone;
-        this.fax = fax;
         this.email = email;
         this.usuarios = usuarios;
         this.universidadeses = universidadeses;
@@ -127,16 +125,6 @@ public class Contato implements java.io.Serializable {
     public void setTelefone(String telefone) {
         if (telefone != null && telefone.length() > 0) {
             this.telefone = telefone;
-        }
-    }
-
-    public String getFax() {
-        return this.fax;
-    }
-
-    public void setFax(String fax) {
-        if (fax != null && fax.length() > 0) {
-            this.fax = fax;
         }
     }
 

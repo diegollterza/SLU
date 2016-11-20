@@ -32,9 +32,6 @@
         <property name="telefone" type="string">
             <column name="telefone" length="20" />
         </property>
-        <property name="fax" type="string">
-            <column name="fax" length="20" />
-        </property>
         <property name="email" type="string">
             <column name="email" length="50" />
         </property>
