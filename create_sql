@@ -17,7 +17,7 @@ DROP TYPE IF EXISTS estados;
 -- 'sc', 'sp', 'se', 'to' );
 
 CREATE TABLE contato (
- id serial primary key,
+ id integer primary key,
  cep varchar(8),
  endereco varchar(150),
  numero integer,
@@ -31,13 +31,13 @@ CREATE TABLE contato (
   OR uf = 'rs' OR uf = 'ro' OR uf = 'rr' OR uf ='sc' OR uf = 'sp' 
   OR uf = 'se' OR uf = 'to'),
  telefone varchar(20),
- fax varchar(20),
  email varchar(80)
 );
 
 CREATE TABLE usuario (
- id serial primary key,
- nome varchar(150) not null,
+ id integer primary key,
+ login varchar(20) not null,
+ nome varchar(150) not null unique,
  senha varchar(20) not null,
  contato_id integer references contato(id)
 );

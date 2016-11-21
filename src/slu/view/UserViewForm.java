@@ -3,18 +3,35 @@ package slu.view;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import slu.controller.MainController;
+import slu.model.Usuario;
 
-public class UserRegisterForm extends javax.swing.JFrame {
+public class UserViewForm extends javax.swing.JFrame {
 
     private MainController mController;
+    private Usuario mUsuario;
 
-    public UserRegisterForm(MainController controller) {
+    public UserViewForm(MainController controller) {
         initComponents();
 
         mController = controller;
+        mUsuario = controller.getUsuarioAtual();
+
+        mTitle.setText("USUÁRIO: " + mUsuario.getLogin());
+        mNome.setText(mUsuario.getNome());
+        mCep.setText(mUsuario.getContato().getCep());
+        mEndereco.setText(mUsuario.getContato().getEndereco());
+        mNumero.setText(String.valueOf(mUsuario.getContato().getNumero()));
+        mComplemento.setText(mUsuario.getContato().getComplemento());
+        mBairro.setText(mUsuario.getContato().getBairro());
+        mCidade.setText(mUsuario.getContato().getCidade());
+        mUf.setText(mUsuario.getContato().getUf());
+        mEmail.setText(mUsuario.getContato().getEmail());
+        mTelefone.setText(mUsuario.getContato().getTelefone());
+
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(53, 66, 89));
         setVisible(true);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -45,9 +62,10 @@ public class UserRegisterForm extends javax.swing.JFrame {
         mTelefone = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
+        mTitle = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        mLogin = new javax.swing.JTextField();
+        mSenhaDenovo = new javax.swing.JTextField();
+        bExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -87,7 +105,7 @@ public class UserRegisterForm extends javax.swing.JFrame {
 
         mNome.setName(""); // NOI18N
 
-        jButton1.setText("ADICIONAR");
+        jButton1.setText("ALTERAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -101,12 +119,19 @@ public class UserRegisterForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Ubuntu Condensed,", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("NOVO USUÁRIO");
+        mTitle.setFont(new java.awt.Font("Ubuntu Condensed,", 1, 18)); // NOI18N
+        mTitle.setForeground(new java.awt.Color(255, 255, 255));
+        mTitle.setText("USUÁRIO");
 
         jLabel13.setForeground(new java.awt.Color(197, 197, 197));
-        jLabel13.setText("LOGIN:*");
+        jLabel13.setText("REPITA A SENHA:*");
+
+        bExcluir.setText("EXCLUIR");
+        bExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,14 +148,14 @@ public class UserRegisterForm extends javax.swing.JFrame {
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mNome)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(mNome, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(mSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
                                         .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(mLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(mSenhaDenovo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,38 +190,39 @@ public class UserRegisterForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mUf, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel12)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(161, 161, 161)
+                        .addComponent(jButton1)
+                        .addGap(7, 7, 7)
+                        .addComponent(bExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel12)
+                .addComponent(mTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(mNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(mLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(mSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(mSenhaDenovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -228,7 +254,8 @@ public class UserRegisterForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(bExcluir))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
@@ -237,20 +264,22 @@ public class UserRegisterForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (mController != null) {
-            if (mNome.getText().length() < 5 || mLogin.getText().length() < 5 || mSenha.getText().length() < 5) {
-                JOptionPane.showMessageDialog(null, "Nome, senha ou login possui tamanho menor que 5");
-                return;
-            }
+            if (mSenha.getText().length() == 0
+                    || (mSenha.getText().length() >= 5 && mSenha.getText().equals(mSenhaDenovo.getText()))) {
 
-            try {
-                //RFS01
-                mController.cadastrarNovoUsuario(mLogin.getText(), mNome.getText(), mSenha.getText(),
-                        mCep.getText(), mEndereco.getText(), Integer.parseInt(mNumero.getText()), mComplemento.getText(), mBairro.getText(), mCidade.getText(), mUf.getText(), mTelefone.getText(), mEmail.getText());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.toString());
-                return;
+                try {
+                    String novaSenha = mSenha.getText().length() == 0 ? mUsuario.getSenha() : mSenha.getText();
+                    //RFS02
+                    mController.alterarUsuario(mNome.getText(), novaSenha,
+                            mCep.getText(), mEndereco.getText(), Integer.parseInt(mNumero.getText()), mComplemento.getText(), mBairro.getText(), mCidade.getText(), mUf.getText(), mTelefone.getText(), mEmail.getText());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                    return;
+                }
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "As senhas são inválidas ou não são iguais");
             }
-            dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -258,13 +287,26 @@ public class UserRegisterForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void bExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirActionPerformed
+        if (mController != null) {
+            try {
+                mController.excluirUsuario();
+                mController.deslogar();
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+
+        }
+    }//GEN-LAST:event_bExcluirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bExcluir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,11 +322,12 @@ public class UserRegisterForm extends javax.swing.JFrame {
     private javax.swing.JTextField mComplemento;
     private javax.swing.JTextField mEmail;
     private javax.swing.JTextField mEndereco;
-    private javax.swing.JTextField mLogin;
     private javax.swing.JTextField mNome;
     private javax.swing.JTextField mNumero;
     private javax.swing.JTextField mSenha;
+    private javax.swing.JTextField mSenhaDenovo;
     private javax.swing.JTextField mTelefone;
+    private javax.swing.JLabel mTitle;
     private javax.swing.JTextField mUf;
     // End of variables declaration//GEN-END:variables
 }
